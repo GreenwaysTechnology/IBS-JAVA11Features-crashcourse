@@ -1,0 +1,365 @@
+			     Java Features
+..............................................................................................
+
+What is Java?
+  Java is Technology.
+
+Why Java Technology was created?
+   Created for Building Portable applications.
+   Platform(OS + Device) Portablity -  Platform indepandant.
+
+James Created Java Technology  in 1989 
+   =>OAK
+   =>Java Programming Language
+
+Java Programming Language => C++,SMALL Talk....
+
+How we can achive Platform Portablity?
+
+   Through Virtual Computing.
+
+How application works?
+
+   Application
+       |
+    Runtime -  It is program written in c/c++
+      |
+     OS
+
+
+How jAVA application works?
+
+   java Application
+       |
+
+    Virtual Runtime(VOS) -  It is program written in c/c++
+      |
+      OS
+.............................................................................................
+
+Java Technology:
+
+Language
+
+Runtime
+
+Java technology is based on "Spec" - JCP , Who is standarzing the java technology.
+
+Who is defining the features ? JCP.
+
+JSR :
+Java SE (70 JSRs)
+Java EE (54 JSRs)
+Java ME (85 JSRs)
+
+
+Java SE (70 JSRs)
+  =>JAVA language spec
+  =>JDK /JRE  Spec
+.............................................................................................
+				Major Versions In java.
+
+JDK 1.0 ........JSE 5
+
+JSE 6...........JSE 8
+
+..............................................................................................
+			          Java 8 Features
+
+
+Java is only Object oriented Programming lanugage before Java 8.
+
+Java 8 introduced Functional Programming Principles.
+
+After Java 8, Java is object oriented and functional style programming language(hybrid language).
+
+Lambda Expressions
+Stream Api
+
+"str".trim().toUppercase() - chaining pattern/builder
+...............................................................................................
+
+Java 8 Streams:
+...............
+
+What is stream?
+ sequence of data.
+
+Java 8 streams are functional Collections api.
+
+Programming is two types:
+
+1.imperative Programming
+    - what is it , how it is working?
+
+ you have list of customers.
+
+ you have to write logic to find the customers who are living in banaglore.
+ 
+  for
+    if()
+      push new items
+ return newCollection
+
+2.Declarative Programming
+   
+   list.filter(city=>city==="banaglore")
+
+Declarative programming is possible only through functional programming.
+
+Java 8 streams are highly declarative collections.
+  it uses all fp principles.
+
+.............
+
+Optional Class:
+...............
+
+How to treat null?
+
+.......
+
+java 8 Date/Time Api
+..............................................................................................
+				Java 9 features
+..............................................................................................
+
+  
+java 9 has introduced very less features, some features are enchancements of java 7.
+
+
+New Features:
+1.Platform Module System.
+   Before java 9 , there was no modular application.
+
+Modularity:
+  Breaking the application, libs into smllar units.
+
+Java distributes app inthe form of  .jar file.
+
+if you look at jdk, all jdk core libs are distribtued via "rt.jar".
+
+ The intention of modular system is how to reduce the jar memory foot print.
+
+The default size of rt.jar file is "64MB".
+
+java 9 who restructured JDK into set of modules so that only required module for our project.
+
+
+       Break the jar into modules and load them according to need
+
+Tools :
+
+jlink tool is used to link modules
+JMOD format is introduced which is packaging format similar to JAR.
+
+javac -d mods --module-source-path  src/ --module com.ibs.features.java
+9.modules
+
+It will generate based on modular pattern
+
+how to run ?
+java --module-path mods/ --module com.ibs.features.java9.modules.Hello
+  The run time uses loader to load the classes.
+
+
+.......................................................................................
+
+interface private method.
+.......................................................................................
+
+New Http Client Api: replacment of HttpUrlConnection object
+
+
+Features of HttpClient api:
+
+1.HTTP 2 support
+2.Websocket support
+to be discussed in jdk 11
+.........................................................................................
+
+try with Resource enchancement.
+..............................
+
+Old java , if you deal with resource classes such as files,sockets,jdbc connetion
+ we need to close
+
+ file.close  - finally
+
+ try {
+
+ }
+catch()
+{}
+ finally{
+   file.close
+ }
+
+Autoclosing Resource
+
+java 7
+
+try(Resource Creation){
+  risky code
+}catch(){
+
+}
+
+java 7,8:
+
+try(FileInputStream ins = new FileInputStream();){
+  risky code
+}catch(){
+
+}
+
+
+java 9
+
+FileInputStream ins = new FileInputStream();
+
+try(ins){
+  risky code
+}catch(){
+
+}
+............................................................................................
+				Java 10 features
+
+1.Local variable type inference - 
+   var keyword to declare variable
+
+2.Immutable collection and pure functions
+  
+   List list = new ArrayList()    
+   list.add(10)//returns always new List object
+
+ immutablity is one of the functional programming concepts.
+ vavr implmentation supports immutable collection, the same thing was adopted in language
+ level in java 10.
+.............................................................................................
+				OptionalelseThrow
+.............................................................................................
+
+Optional.orElseThrow()
+   It will help us to throw meaningfull exception if there is no value present.
+ .............................................................................................
+			      java 11 features
+.............................................................................................
+
+1.Local variable syntax inside lambda parameters.
+
+package com.ibs.features.java11.lambda;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class LocalVariableInsideLambda {
+    public static void main(String[] args) {
+        List<String> mylists = Arrays.asList("Java 8", "Java 11");
+        String result = mylists.stream().map((var x) -> x.toUpperCase()).collect(Collectors.joining(","));
+        System.out.println(result);
+    }
+}
+..........................................................................................
+
+2.New String methods in the String class
+
+1.isBlank
+2.lines
+3.strip
+4.stripLeading
+5.stripTrailing
+6.repeat
+package com.ibs.features.java11.stringapis;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class NewStringApis {
+    public static void main(String[] args) {
+        //String multi String
+        String multiString = "Oracle helps \n \n developers \n to build java apps";
+        List<String> strings = multiString.lines().filter(line -> !line.isBlank()).map(String::strip).collect(Collectors.toList());
+        System.out.println(strings);
+    }
+}
+.............................................................................................
+				Collection to Array Conversion
+..............................................................................................
+
+package com.ibs.features.java11.collections;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class CollectionToArray {
+    public static void main(String[] args) {
+        List<Integer> integerList = Arrays.asList(1, 2, 3, 4);
+        Integer[] integers = integerList.toArray(Integer[]::new);
+        System.out.println(integers.length);
+    }
+}
+............................................................................................
+				  java.util.function.Predicate
+.............................................................................................
+
+package com.ibs.features.java11.collections;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class PredicateMethods {
+    public static void main(String[] args) {
+        List<String> stringList = Arrays.asList("java", "\n \n", "J2ee");
+        List<String> strings = stringList.stream().filter(Predicate.not(String::isBlank)).collect(Collectors.toList());
+        System.out.println(strings);
+    }
+}
+............................................................................................
+			java 9 http api : java.net.http package has been standardized
+
+package com.ibs.features.java11.http;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
+public class HttpRequestBuilder {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .connectTimeout(Duration.ofSeconds(20))
+                .build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().GET().uri(URI.create("https://jsonplaceholder.typicode.com/todos")).build();
+        HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+    }
+}
+............................................................................................
+			Running Java Code without compilation
+
+
+In java 11 we dont need to compile java code ,we can run directly.
+
+java Hello.java
+Hello
+
+Quarkus
+
+Grallvm.
+
+
+
+
+
+
+
+
+
